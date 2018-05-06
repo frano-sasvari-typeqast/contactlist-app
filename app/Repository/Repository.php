@@ -82,4 +82,36 @@ abstract class Repository
     {
         return $this->queryBuilder->first();
     }
+
+    /**
+     * Get first eloquent model
+     *
+     * @param  array  $attributes
+     * @return \App\Model\Eloquent|null
+     */
+    public function create(array $attributes = [])
+    {
+        return $this->queryBuilder->create($attributes);
+    }
+
+    /**
+     * Get first eloquent model
+     *
+     * @param  array  $values
+     * @return \App\Model\Eloquent|null
+     */
+    public function update(array $values = [])
+    {
+        return $this->queryBuilder->update($values);
+    }
+
+    /**
+     * Get first eloquent model
+     *
+     * @return \App\Model\Eloquent|null
+     */
+    public function delete()
+    {
+        return $this->queryBuilder->delete();
+    }
 }
