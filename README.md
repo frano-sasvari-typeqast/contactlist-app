@@ -10,12 +10,12 @@ Add following lines to `C:\Windows\System32\drivers\etc\hosts` file:
     #----------------------------------------------
     # CONTACTLIST APP - LOCALHOST
     #----------------------------------------------
-    127.0.0.1    www.contactlistapp.dev
-    127.0.0.1    contactlistapp.dev
-    127.0.0.1    www.cdn.contactlistapp.dev
-    127.0.0.1    cdn.contactlistapp.dev
-    127.0.0.1    www.api.contactlistapp.dev
-    127.0.0.1    api.contactlistapp.dev
+    127.0.0.1    www.contactlistapp.com
+    127.0.0.1    contactlistapp.com
+    127.0.0.1    www.cdn.contactlistapp.com
+    127.0.0.1    cdn.contactlistapp.com
+    127.0.0.1    www.api.contactlistapp.com
+    127.0.0.1    api.contactlistapp.com
 
 ### 2. Edit hosts file
 
@@ -25,9 +25,9 @@ Add following lines to `C:\xampp\apache\conf\extra\httpd-vhosts.conf` file:
     # CONTACTLIST LOCAL - URL, CDN
     #----------------------------------------------
 
-    <VirtualHost contactlistapp.dev:80>
-        ServerName contactlistapp.dev
-        ServerAlias www.contactlistapp.dev cdn.contactlistapp.dev www.cdn.contactlistapp.dev api.contactlistapp.dev www.api.contactlistapp.dev
+    <VirtualHost contactlistapp.com:80>
+        ServerName contactlistapp.com
+        ServerAlias www.contactlistapp.com cdn.contactlistapp.com www.cdn.contactlistapp.com api.contactlistapp.com www.api.contactlistapp.com
         DocumentRoot "c:/xampp/htdocs/projects-test/contactlist-app/public"
         DirectoryIndex index.php
         <Directory "C/xampp/htdocs/projects-test/contactlist-app/public">
@@ -43,9 +43,9 @@ Add following lines to `C:\xampp\apache\conf\extra\httpd-vhosts.conf` file:
 
 Copy source of `.env.example` to newly created `.env` file. Prepare url and database configuration settings.
 
-### 4. Run php artisan key:generate
+### 4. php artisan key:generate
 
-### 5. Run composer update
+### 5. composer update
 
 ### 6. npm install
 
