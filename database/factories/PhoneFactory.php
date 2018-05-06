@@ -1,20 +1,20 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Model\Phone;
+use App\Model\Contact;
 
 /*
 |--------------------------------------------------------------------------
-| Model Factories
+| Phone Factory
 |--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
 */
 
-$factory->define(App\Model\Phone::class, function (Faker $faker) {
+$contactIds = Contact::all()->pluck('id')->toArray();
+
+$factory->define(Phone::class, function (Faker $faker) use ($contactIds) {
     return [
+        'contact_id' => $faker->randomElement($contactIds),
         'label' => $faker->word,
         'number' => $faker->phoneNumber,
     ];
