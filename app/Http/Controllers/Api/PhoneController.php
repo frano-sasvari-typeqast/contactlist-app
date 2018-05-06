@@ -39,18 +39,18 @@ class PhoneController extends Controller
     }
 
     /**
-     * Insert new phone
+     * Create new phone
      *
      * @param  \App\Http\Requests\PhoneRequest  $request
      * @param  \App\Repository\PhoneRepository  $phoneRepository
      * @return \Illuminate\Http\Response
      */
-    public function insert(PhoneRequest $request, PhoneRepository $phoneRepository)
+    public function create(PhoneRequest $request, PhoneRepository $phoneRepository)
     {
         $input = $request->validationData();
 
         $phone = $phoneRepository->newQuery()
-            ->insert($input);
+            ->create($input);
 
         return new PhoneResource($phone);
     }

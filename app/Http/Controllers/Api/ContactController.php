@@ -40,18 +40,18 @@ class ContactController extends Controller
     }
 
     /**
-     * Insert new contact
+     * Create new contact
      *
      * @param  \App\Http\Requests\ContactRequest  $request
      * @param  \App\Repository\ContactRepository  $contactRepository
      * @return \Illuminate\Http\Response
      */
-    public function insert(ContactRequest $request, ContactRepository $contactRepository)
+    public function create(ContactRequest $request, ContactRepository $contactRepository)
     {
         $input = $request->validationData();
 
         $contact = $contactRepository->newQuery()
-            ->insert($input);
+            ->create($input);
 
         return new ContactResource($contact);
     }
