@@ -34,6 +34,13 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespaceApi = 'App\Http\Controllers\Api';
 
     /**
+     * Cdn namespace
+     *
+     * @var string
+     */
+    protected $namespaceCdn = 'App\Http\Controllers\Cdn';
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
