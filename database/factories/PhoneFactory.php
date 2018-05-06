@@ -1,8 +1,8 @@
 <?php
 
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\DB;
 use App\Model\Phone;
-use App\Model\Contact;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,11 +10,11 @@ use App\Model\Contact;
 |--------------------------------------------------------------------------
 */
 
-$contactIds = Contact::all()->pluck('id')->toArray();
+$factory->define(Phone::class, function (Faker $faker) {
+    $contact = DB::table('contact')->inRandomOrder()->first(['id']);
 
-$factory->define(Phone::class, function (Faker $faker) use ($contactIds) {
     return [
-        'contact_id' => $faker->randomElement($contactIds),
+        'contact_id' => $contact->id,
         'label' => $faker->word,
         'number' => $faker->phoneNumber,
     ];

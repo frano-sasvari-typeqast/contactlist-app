@@ -14,6 +14,6 @@ $factory->define(Contact::class, function (Faker $faker) {
         'firstname' => $faker->firstName,
         'lastname' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
-        'is_favorite' => ($faker->boolean() ? 1 : null),
+        'is_favorite' => ($faker->boolean(20) ? 1 : null),
     ];
 });
