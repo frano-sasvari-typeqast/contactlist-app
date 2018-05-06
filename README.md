@@ -1,5 +1,5 @@
-# PhoneBook App
+# ContactList App
 
-The PhoneBook Application which provides contacts and favorite contacts list. Build with Laravel as backend framework for RESTful API, Vue.js as frontend framework and Bootstrap 4 as CSS solution.
+The ContactList Application which provides contacts and favorite contacts list. Built with Laravel as backend framework for RESTful API and Bootstrap/Vue.js as frontend frameworks.
 
 ## Configuration
