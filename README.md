@@ -14,8 +14,8 @@ Add following lines to `C:\Windows\System32\drivers\etc\hosts` file:
     127.0.0.1    contactlistapp.dev
     127.0.0.1    www.cdn.contactlistapp.dev
     127.0.0.1    cdn.contactlistapp.dev
-    127.0.0.1    www.api.egaplocal.dev
-    127.0.0.1    api.egaplocal.dev
+    127.0.0.1    www.api.contactlistapp.dev
+    127.0.0.1    api.contactlistapp.dev
 
 ### 2. Edit hosts file
 
@@ -25,12 +25,12 @@ Add following lines to `C:\xampp\apache\conf\extra\httpd-vhosts.conf` file:
     # CONTACTLIST LOCAL - URL, CDN
     #----------------------------------------------
 
-    <VirtualHost contactlistapp.com:80>
+    <VirtualHost contactlistapp.dev:80>
         ServerName contactlistapp.dev
         ServerAlias www.contactlistapp.dev cdn.contactlistapp.dev www.cdn.contactlistapp.dev api.contactlistapp.dev www.api.contactlistapp.dev
-        DocumentRoot "c:/xampp/htdocs/projects/egap/public"
+        DocumentRoot "c:/xampp/htdocs/projects-test/contactlist-app/public"
         DirectoryIndex index.php
-        <Directory "C/xampp/htdocs/projects/egap/public">
+        <Directory "C/xampp/htdocs/projects-test/contactlist-app/public">
             Options Indexes FollowSymLinks MultiViews Includes execCGI
             AllowOverride All
             Order allow,deny
@@ -59,7 +59,7 @@ Run the following code in CMD (run as administrator) to create symbolic link bet
 
 Or if you have custom `storage` folder
 
-    mklink /d "c:\xampp\htdocs\projects\egap\public\storage" "c:\xampp\htdocs\projects\egap\storage\app\public"
+    mklink /d "c:\xampp\htdocs\projects\contactlist-app\public\storage" "c:\xampp\htdocs\projects\contactlist-app\storage\app\public"
 
 ### 9. Create database
 
