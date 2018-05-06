@@ -15,7 +15,7 @@ $factory->define(Phone::class, function (Faker $faker) {
 
     return [
         'contact_id' => $contact->id,
-        'label' => $faker->word,
+        'label' => mb_ucfirst($faker->word),
         'number' => $faker->phoneNumber,
     ];
 });
