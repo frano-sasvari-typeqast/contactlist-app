@@ -6,6 +6,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
+use Illuminate\Contracts\Routing\ResponseFactory;
 
 class Controller extends BaseController
 {
@@ -32,7 +34,7 @@ class Controller extends BaseController
      * @param  \Illuminate\Contracts\Routing\ResponseFactory  $response
      * @return void
      */
-    public function __construct(Request $request, Response $response)
+    public function __construct(Request $request, ResponseFactory $response)
     {
         $this->request = $request;
         $this->response = $response;
