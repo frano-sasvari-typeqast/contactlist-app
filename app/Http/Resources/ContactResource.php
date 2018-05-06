@@ -24,7 +24,7 @@ class ContactResource extends Resource
             'email' => $this->email,
             'is_favorite' => $this->is_favorite,
             'created_at' => $this->created_at,
-            'numbers' => $phoneResource->collection($this->phones),
+            'phones' => $phoneResource->collection($this->whenLoaded('phones')),
         ];
     }
 }
