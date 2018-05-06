@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Model\Contact;
 
 class ContactTableSeeder extends Seeder
 {
@@ -12,6 +12,18 @@ class ContactTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('contact')->delete();
 
+        $max = 30;
+
+        $this->command->getOutput()->progressStart($max);
+
+        factory(Contact::class, $max)->create()->each(function ($contact) {
+            $contact->make();
+
+            $this->command->getOutput()->progressAdvance();
+        });
+
+        $this->command->getOutput()->progressFinish();
     }
 }
