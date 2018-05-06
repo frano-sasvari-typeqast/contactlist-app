@@ -40,6 +40,16 @@ abstract class FormRequest extends BaseFormRequest
     }
 
     /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
      * Get custom messages for validator errors.
      *
      * @return array
