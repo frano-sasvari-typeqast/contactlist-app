@@ -80,7 +80,7 @@ return [
 
     'failed' => [
         'database' => env('DB_CONNECTION', 'mysql'),
-        'table' => 'laravel_jobs_failed',
+        'table' => 'laravel_failed_jobs',
     ],
 
 ];
