@@ -1,18 +1,28 @@
 <?php
 
-use Illuminate\Http\Request;
+/*  @var  $router  \Illuminate\Routing\Router          */
 
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| Contact Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+$router->get('contacts', 'ContactController@index');
+$router->get('contacts/{id}', 'ContactController@show');
+$router->post('contacts', 'ContactController@create');
+$router->put('contacts/{id}', 'ContactController@update');
+$router->delete('contacts/{id}', 'ContactController@delete');
+
+$router->get('contacts/{id}/phones', 'ContactPhoneController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Phone Routes
+|--------------------------------------------------------------------------
+*/
+
+$router->get('phones/{id}', 'PhoneController@show');
+$router->post('phones', 'PhoneController@create');
+$router->put('phones/{id}', 'PhoneController@update');
+$router->delete('phones/{id}', 'PhoneController@delete');
