@@ -52,9 +52,8 @@ class ContactRepository extends Repository
     }
 
     /**
-     * Filter contacts by id
+     * Load contact relations
      *
-     * @param  int  $id
      * @return $this
      */
     public function loadRelations() : ContactRepository
