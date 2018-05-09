@@ -13,6 +13,7 @@ class PhoneNumberTableSeeder extends Seeder
     public function run()
     {
         DB::table('phone_number')->delete();
+        DB::table('phone_number')->truncate();
 
         $max = 150;
 

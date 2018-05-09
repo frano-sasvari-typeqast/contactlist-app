@@ -13,6 +13,7 @@ class ContactTableSeeder extends Seeder
     public function run()
     {
         DB::table('contact')->delete();
+        DB::table('contact')->truncate();
 
         $max = 30;
 

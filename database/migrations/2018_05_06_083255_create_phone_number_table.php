@@ -12,7 +12,7 @@ class CreatePhoneNumberTable extends Migration
      */
     public function up()
     {
-        Schema::create('phone', function (Blueprint $table) {
+        Schema::create('phone_number', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('contact_id');
             $table->string('label', 60);

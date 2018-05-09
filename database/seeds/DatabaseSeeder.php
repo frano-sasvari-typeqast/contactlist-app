@@ -12,6 +12,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(ContactTableSeeder::class);
-        $this->call(PhoneTableSeeder::class);
+        $this->call(PhoneNumberTableSeeder::class);
     }
 }
