@@ -13,7 +13,7 @@ class Seeder extends BaseSeeder
      */
     public function __construct()
     {
-        //DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
     }
 
     /**
@@ -23,6 +23,6 @@ class Seeder extends BaseSeeder
      */
     public function __destruct()
     {
-        //DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\DB;
-use App\Model\Phone;
+use App\Model\PhoneNumber;
 
-class PhoneTableSeeder extends Seeder
+class PhoneNumberTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,13 +12,13 @@ class PhoneTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('phone')->delete();
+        DB::table('phone_number')->delete();
 
         $max = 150;
 
         $this->command->getOutput()->progressStart($max);
 
-        factory(Phone::class, $max)->create()->each(function ($phone) {
+        factory(PhoneNumber::class, $max)->create()->each(function ($phone) {
             $phone->make();
 
             $this->command->getOutput()->progressAdvance();

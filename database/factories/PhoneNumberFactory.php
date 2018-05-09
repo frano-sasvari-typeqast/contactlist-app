@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\DB;
-use App\Model\Phone;
+use App\Model\PhoneNumber;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,7 +10,7 @@ use App\Model\Phone;
 |--------------------------------------------------------------------------
 */
 
-$factory->define(Phone::class, function (Faker $faker) {
+$factory->define(PhoneNumber::class, function (Faker $faker) {
     $contact = DB::table('contact')->inRandomOrder()->first(['id']);
 
     return [
