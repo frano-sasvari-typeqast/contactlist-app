@@ -15,16 +15,15 @@ class ContactResource extends Resource
      */
     public function toArray($request) : array
     {
-        $phoneNumberResource = new PhoneNumberResource($this->phoneNumbers);
-
         return [
             'id' => (int) $this->id,
             'firstname' => $this->firstname,
             'lastname' => $this->lastname,
             'email' => $this->email,
+            'upload_avatar' => $this->upload_avatar,
             'is_favorite' => $this->is_favorite,
-            'created_at' => $this->created_at,
-            'phones_numbers' => $phoneNumberResource->collection($this->whenLoaded('phoneNumbers')),
+            'created_at' => $this->created_at->toDateTimeString(),
+            'phone_numbers' => PhoneNumberResource::collection($this->whenLoaded('phoneNumbers'))
         ];
     }
 }

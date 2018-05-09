@@ -19,6 +19,7 @@ class PhoneNumberResource extends Resource
             'contact_id' => (int) $this->contact_id,
             'label' => $this->label,
             'number' => $this->number,
+            'created_at' => $this->created_at->toDateTimeString(),
         ];
     }
 }
