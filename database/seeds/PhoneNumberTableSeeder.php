@@ -15,7 +15,7 @@ class PhoneNumberTableSeeder extends Seeder
         DB::table('phone_number')->delete();
         DB::table('phone_number')->truncate();
 
-        $max = 150;
+        $max = 300;
 
         $this->command->getOutput()->progressStart($max);
 

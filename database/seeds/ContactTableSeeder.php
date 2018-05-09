@@ -15,7 +15,7 @@ class ContactTableSeeder extends Seeder
         DB::table('contact')->delete();
         DB::table('contact')->truncate();
 
-        $max = 30;
+        $max = 50;
 
         $this->command->getOutput()->progressStart($max);
 
