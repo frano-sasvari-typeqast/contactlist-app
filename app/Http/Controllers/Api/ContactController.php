@@ -16,10 +16,18 @@ class ContactController extends Controller
      */
     public function index(ContactRepository $contactRepository)
     {
-        $contacts = $contactRepository->newQuery()
-            ->get();
+        $contactsQueryBuilder = $contactRepository->newQuery();
 
-        return new ContactResource($contacts);
+        if ($this->request->get('keyword')) {
+            $contactsQueryBuilder = $contactsQueryBuilder->filterByKeyword($this->request->get('keyword'));
+        }
+
+        $contacts = $contactsQueryBuilder->paginate();
+        $contacts->appends($this->request->except('page'));
+
+        $contactResource = new ContactResource($contacts);
+
+        return $contactResource->collection($contacts);
     }
 
     /**
@@ -36,7 +44,15 @@ class ContactController extends Controller
             ->loadRelations()
             ->first();
 
-        dd($contact);
+        if (! $contact) {
+            abort(response()->json([
+                'meta' => [
+                    'error' => true,
+                    'code' => 404,
+                    'message' => 'Contact with ID "'.$id.'" was not found.'
+                ],
+            ]));
+        }
 
         return new ContactResource($contact);
     }
