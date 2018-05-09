@@ -28,8 +28,25 @@ class ContactRepository extends Repository
      */
     public function filterById(int $id) : ContactRepository
     {
-        $this->queryBuilder
+        $this->queryBuilder = $this->queryBuilder
             ->where('id', $id);
+
+        return $this;
+    }
+
+    /**
+     * Filter contacts by keyword
+     *
+     * @param  string  $keyword
+     * @return $this
+     */
+    public function filterByKeyword(string $keyword) : ContactRepository
+    {
+        $this->queryBuilder = $this->queryBuilder
+            ->where(function ($query) use ($keyword) {
+                $query->search($keyword);
+                $query->orWhere('email', 'LIKE', '%'.$keyword.'%');
+            });
 
         return $this;
     }
@@ -42,7 +59,7 @@ class ContactRepository extends Repository
      */
     public function loadRelations() : ContactRepository
     {
-        $this->queryBuilder
+        $this->queryBuilder = $this->queryBuilder
             ->with('phoneNumbers');
 
         return $this;
