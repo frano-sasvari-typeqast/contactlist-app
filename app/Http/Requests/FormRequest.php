@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest as BaseFormRequest;
 use Illuminate\Validation\Factory as ValidationFactory;
 use Illuminate\Config\Repository as Config;
@@ -31,7 +32,7 @@ abstract class FormRequest extends BaseFormRequest
      * @param  \Illuminate\Translation\Translator  $lang
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function validator(ValidationFactory $validationFactory, Config $config, Translator $lang)
+    public function validator(ValidationFactory $validationFactory, Config $config, Translator $lang) : Validator
     {
         $this->config = $config;
         $this->lang = $lang;
@@ -44,7 +45,7 @@ abstract class FormRequest extends BaseFormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }
@@ -54,7 +55,7 @@ abstract class FormRequest extends BaseFormRequest
      *
      * @return array
      */
-    public function messages()
+    public function messages() : array
     {
         if ($this->messagesTranslationKey && $this->lang->has($this->messagesTranslationKey)) {
             return $this->lang->get($this->messagesTranslationKey);

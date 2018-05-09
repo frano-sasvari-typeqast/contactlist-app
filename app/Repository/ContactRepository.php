@@ -26,7 +26,7 @@ class ContactRepository extends Repository
      * @param  int  $id
      * @return $this
      */
-    public function filterById($id)
+    public function filterById(int $id) : ContactRepository
     {
         $this->queryBuilder
             ->where('id', $id);
@@ -40,10 +40,10 @@ class ContactRepository extends Repository
      * @param  int  $id
      * @return $this
      */
-    public function loadRelations()
+    public function loadRelations() : ContactRepository
     {
         $this->queryBuilder
-            ->with('phones');
+            ->with('phoneNumbers');
 
         return $this;
     }

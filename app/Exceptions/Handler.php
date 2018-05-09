@@ -68,6 +68,18 @@ class Handler extends ExceptionHandler
     {
         $status = $e->getStatusCode();
 
+        if (request()->ajax() || request()->wantsJson()) {
+            $json = [
+                'meta' => [
+                    'error' => true,
+                    'code' => $e->getCode(),
+                    'message' => $e->getMessage(),
+                ],
+            ];
+
+            return response()->json($json, $status);
+        }
+
         $paths = collect(config('view.paths'));
 
         view()->replaceNamespace('errors', $paths->map(function ($path) {

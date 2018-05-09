@@ -2,14 +2,16 @@
 
 namespace App\Model;
 
-class Phone extends Eloquent
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class PhoneNumber extends Eloquent
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'phone';
+    protected $table = 'phone_number';
 
     /**
      * Indicates if the model should be timestamped.
@@ -37,7 +39,7 @@ class Phone extends Eloquent
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function contact()
+    public function contact() : BelongsTo
     {
         return $this->belongsTo(Contact::class);
     }

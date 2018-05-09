@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Cache\Repository as Cache;
 use Illuminate\Config\Repository as Config;
 
@@ -46,7 +48,7 @@ abstract class Repository
      *
      * @return $this
      */
-    public function newQuery()
+    public function newQuery() : Repository
     {
         $this->queryBuilder = new $this->model;
 
@@ -58,7 +60,7 @@ abstract class Repository
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function get()
+    public function get() : Collection
     {
         return $this->queryBuilder->get();
     }
@@ -66,9 +68,9 @@ abstract class Repository
     /**
      * Get paginated eloquent models
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function paginate($perPage = 20)
+    public function paginate($perPage = 20) : LengthAwarePaginator
     {
         return $this->queryBuilder->paginate($perPage);
     }

@@ -2,14 +2,14 @@
 
 namespace App\Repository;
 
-use App\Model\Phone;
+use App\Model\PhoneNumber;
 
 class PhoneRepository extends Repository
 {
     /**
      * The eloquent builder instance
      *
-     * @var \App\Model\Phone
+     * @var \App\Model\PhoneNumber
      */
     protected $queryBuilder;
 
@@ -18,7 +18,7 @@ class PhoneRepository extends Repository
      *
      * @var string
      */
-    protected $model = Phone::class;
+    protected $model = PhoneNumber::class;
 
     /**
      * Filter contacts by id
@@ -26,7 +26,7 @@ class PhoneRepository extends Repository
      * @param  int  $id
      * @return $this
      */
-    public function filterById($id)
+    public function filterById(int $id) : PhoneRepository
     {
         $this->queryBuilder
             ->where('id', $id);
@@ -40,7 +40,7 @@ class PhoneRepository extends Repository
      * @param  int  $id
      * @return $this
      */
-    public function loadRelations()
+    public function loadRelations() : PhoneRepository
     {
         $this->queryBuilder
             ->with('contact');

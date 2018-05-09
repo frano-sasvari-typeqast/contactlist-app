@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
-use App\Http\Resources\PhoneResource;
+use App\Http\Resources\PhoneNumberResource;
 
 class ContactResource extends Resource
 {
@@ -13,9 +13,9 @@ class ContactResource extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request) : array
     {
-        $phoneResource = new PhoneResource($this->phones);
+        $phoneNumberResource = new PhoneNumberResource($this->phoneNumbers);
 
         return [
             'id' => (int) $this->id,
@@ -24,7 +24,7 @@ class ContactResource extends Resource
             'email' => $this->email,
             'is_favorite' => $this->is_favorite,
             'created_at' => $this->created_at,
-            'phones' => $phoneResource->collection($this->whenLoaded('phones')),
+            'phones_numbers' => $phoneNumberResource->collection($this->whenLoaded('phoneNumbers')),
         ];
     }
 }

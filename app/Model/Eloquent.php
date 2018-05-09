@@ -32,7 +32,7 @@ abstract class Eloquent extends Model
      *
      * @return void
     */
-    protected static function boot()
+    protected static function boot() : void
     {
         parent::boot();
         static::saving(function ($model) {
@@ -45,7 +45,7 @@ abstract class Eloquent extends Model
     *
     * @return void
     */
-    protected function setNullables()
+    protected function setNullables() : void
     {
         foreach ($this->nullable as $field) {
             if (empty($this->attributes[$field])) {

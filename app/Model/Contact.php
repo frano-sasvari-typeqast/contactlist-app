@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class Contact extends Eloquent
 {
     /**
@@ -17,13 +19,6 @@ class Contact extends Eloquent
      * @var bool
      */
     public $timestamps = true;
-
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = ['id'];
 
     /**
      * The attributes that are mass assignable.
@@ -42,9 +37,9 @@ class Contact extends Eloquent
     /**
      * Get name for notification
      *
-     * @return mixed
+     * @return string
      */
-    public function getFullName()
+    public function getFullName() : string
     {
         return $this->firstname.' '.$this->lastname;
     }
@@ -54,8 +49,8 @@ class Contact extends Eloquent
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function phones()
+    public function phoneNumbers() : HasMany
     {
-        return $this->hasMany(Phone::class);
+        return $this->hasMany(PhoneNumber::class);
     }
 }

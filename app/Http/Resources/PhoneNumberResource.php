@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class PhoneResource extends Resource
+class PhoneNumberResource extends Resource
 {
     /**
      * Transform the resource collection into an array.
@@ -12,7 +12,7 @@ class PhoneResource extends Resource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request) : array
     {
         return [
             'id' => (int) $this->id,

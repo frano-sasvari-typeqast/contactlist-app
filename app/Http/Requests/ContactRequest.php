@@ -9,7 +9,7 @@ class ContactRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'firstname' => 'required',
@@ -25,7 +25,7 @@ class ContactRequest extends FormRequest
      *
      * @return array
      */
-    public function validationData()
+    public function validationData() : array
     {
         return [
             'firstname' => cleanup($this->input('firstname')),

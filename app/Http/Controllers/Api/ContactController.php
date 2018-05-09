@@ -36,6 +36,8 @@ class ContactController extends Controller
             ->loadRelations()
             ->first();
 
+        dd($contact);
+
         return new ContactResource($contact);
     }
 
