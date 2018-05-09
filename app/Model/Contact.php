@@ -3,9 +3,12 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Traits\Searchable;
 
 class Contact extends Eloquent
 {
+    use Searchable;
+
     /**
      * The table associated with the model.
      *
@@ -33,6 +36,13 @@ class Contact extends Eloquent
      * @var array
      */
     protected $nullable = ['upload_avatar', 'is_favorite'];
+
+    /**
+     * Fields which are searchable.
+     *
+     * @var array
+     */
+    protected $searchable = ['firstname', 'lastname'];
 
     /**
      * Get name for notification
