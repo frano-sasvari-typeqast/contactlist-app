@@ -4,10 +4,11 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Traits\Searchable;
+use Uploadify\Traits\UploadifyTrait;
 
 class Contact extends Eloquent
 {
-    use Searchable;
+    use Searchable, UploadifyTrait;
 
     /**
      * The table associated with the model.
@@ -43,6 +44,15 @@ class Contact extends Eloquent
      * @var array
      */
     protected $searchable = ['firstname', 'lastname'];
+
+    /**
+     * List of uploadify images
+     *
+     * @var array
+     */
+    public $uploadifyImages = [
+        'upload_avatar' => ['path' => 'images/contact'],
+    ];
 
     /**
      * Get name for notification
