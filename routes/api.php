@@ -14,7 +14,7 @@ $router->post('contacts', 'ContactController@create');
 $router->put('contacts/{id}', 'ContactController@update');
 $router->delete('contacts/{id}', 'ContactController@delete');
 
-$router->get('contacts/{id}/phones', 'ContactPhoneController@index');
+$router->get('contacts/{id}/phone-numbers', 'ContactPhoneNumberController@index');
 
 /*
 |--------------------------------------------------------------------------
