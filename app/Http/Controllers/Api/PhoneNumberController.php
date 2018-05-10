@@ -9,19 +9,6 @@ use App\Http\Resources\PhoneNumberResource;
 class PhoneNumberController extends Controller
 {
     /**
-     * Get all phones
-     *
-     * @param  \App\Repository\PhoneNumberRepository  $phoneNumberRepository
-     * @return \Illuminate\Http\Response
-     */
-    public function index(PhoneNumberRepository $phoneNumberRepository)
-    {
-        $phoneNumbers = $phoneNumberRepository->newQuery()->get();
-
-        return new PhoneNumberResource($phoneNumbers);
-    }
-
-    /**
      * Show phone by id
      *
      * @param  \App\Repository\PhoneNumberRepository  $phoneNumberRepository
@@ -30,12 +17,22 @@ class PhoneNumberController extends Controller
      */
     public function show(PhoneNumberRepository $phoneNumberRepository, $id)
     {
-        $phone = $phoneNumberRepository->newQuery()
+        $phoneNumber = $phoneNumberRepository->newQuery()
             ->filterById($id)
             ->loadRelations()
             ->first();
 
-        return new PhoneNumberResource($phone);
+        if (! $phoneNumber) {
+            abort(response()->json([
+                'meta' => [
+                    'error' => true,
+                    'code' => 404,
+                    'message' => 'Phone number with ID "'.$id.'" was not found.'
+                ],
+            ]), 404);
+        }
+
+        return new PhoneNumberResource($phoneNumber);
     }
 
     /**
@@ -49,10 +46,10 @@ class PhoneNumberController extends Controller
     {
         $input = $request->validationData();
 
-        $phone = $phoneNumberRepository->newQuery()
+        $phoneNumber = $phoneNumberRepository->newQuery()
             ->create($input);
 
-        return new PhoneNumberResource($phone);
+        return new PhoneNumberResource($phoneNumber);
     }
 
     /**
@@ -83,10 +80,22 @@ class PhoneNumberController extends Controller
      */
     public function delete(PhoneNumberRepository $phoneNumberRepository, $id)
     {
-        $phone = $phoneNumberRepository->newQuery()
+        $phoneNumber = $phoneNumberRepository->newQuery()
             ->filterById($id)
-            ->delete();
+            ->first();
 
-        return new PhoneNumberResource($phone);
+        if (! $phoneNumber) {
+            abort(response()->json([
+                'meta' => [
+                    'error' => true,
+                    'code' => 404,
+                    'message' => 'Phone number with ID "'.$id.'" was not found.'
+                ],
+            ], 404));
+        }
+
+        $phoneNumber->delete();
+
+        return new PhoneNumberResource($phoneNumber);
     }
 }
