@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Cache\Repository as Cache;
 use Illuminate\Config\Repository as Config;
+use App\Model\Eloquent;
 
 abstract class Repository
 {
@@ -93,27 +94,37 @@ abstract class Repository
      */
     public function create(array $attributes = [])
     {
-        return $this->queryBuilder->create($attributes);
+        $model = new $this->model;
+
+        $model->fill($attributes);
+        $model->save();
+
+        return $model;
     }
 
     /**
      * Get first eloquent model
      *
+     * @param  \App\Model\Eloquent  $model
      * @param  array  $values
      * @return \App\Model\Eloquent|null
      */
-    public function update(array $values = [])
+    public function update(Eloquent $model, array $values = [])
     {
-        return $this->queryBuilder->update($values);
+        $model->fill($values);
+        $model->save();
+
+        return $model;
     }
 
     /**
      * Get first eloquent model
      *
-     * @return \App\Model\Eloquent|null
+     * @param  \App\Model\Eloquent  $model
+     * @return bool|null
      */
-    public function delete()
+    public function delete(Eloquent $model)
     {
-        return $this->queryBuilder->delete();
+        return $model->delete();
     }
 }
