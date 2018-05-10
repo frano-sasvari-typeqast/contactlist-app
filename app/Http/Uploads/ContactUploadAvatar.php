@@ -20,7 +20,7 @@ class ContactUploadAvatar extends BaseUpload
      * @param  mixed  $file
      * @return string
      */
-    public function upload($file)
+    public function upload($file) : string
     {
         $contact = new Contact();
 
