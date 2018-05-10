@@ -48,7 +48,7 @@ class ContactCreateTest extends TestCase
             'firstname' => $this->faker->firstName,
             'lastname' => $this->faker->lastName,
             'email' => '',
-            'upload_avatar' => null,
+            'upload_avatar' => '',
             'is_favorite' => 1,
         ];
 
