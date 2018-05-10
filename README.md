@@ -61,9 +61,9 @@ Or if you have custom `storage` folder
 
     mklink /d "c:\xampp\htdocs\projects\contactlist-app\public\storage" "c:\xampp\htdocs\projects\contactlist-app\storage\app\public"
 
-### 9. Create database
+### 9. Create databases
 
-Create `contactlist_app_db` database locally. Charset must be set to `utf8mb4` and collation to `utf8mb4_unicode_ci`.
+Create `contactlist_app_db` database and `contactlist_test_db` test database locally. Charset must be set to `utf8mb4` and collation to `utf8mb4_unicode_ci`.
 
 ### 10. Run database migrations
 
