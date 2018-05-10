@@ -42,7 +42,7 @@ class ContactCreateTest extends TestCase
      *
      * @return void
      */
-    public function testContactCreateEmailValidationError()
+    public function testContactCreateValidationErrorEmail()
     {
         $input = [
             'firstname' => $this->faker->firstName,
