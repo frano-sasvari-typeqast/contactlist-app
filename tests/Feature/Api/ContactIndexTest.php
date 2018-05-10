@@ -65,4 +65,48 @@ class ContactTest extends TestCase
                 'lastname' => $contact->lastname,
             ]);
     }
+
+    /**
+     * Test contact index page
+     *
+     * @return void
+     */
+    public function testContactSearchName()
+    {
+        factory(Contact::class, 50)->create();
+
+        $contact = Contact::inRandomOrder()->first();
+
+        $response = $this->get('contacts?keyword='.$contact->firstname);
+
+        $response
+            ->assertStatus(200)
+            ->assertJsonFragment([
+                'firstname' => $contact->firstname,
+                'lastname' => $contact->lastname,
+                'email' => $contact->email,
+            ]);
+    }
+
+    /**
+     * Test contact index page
+     *
+     * @return void
+     */
+    public function testContactSearchEmail()
+    {
+        factory(Contact::class, 50)->create();
+
+        $contact = Contact::inRandomOrder()->first();
+
+        $response = $this->get('contacts?keyword='.$contact->email);
+
+        $response
+            ->assertStatus(200)
+            ->assertJsonFragment([
+                'firstname' => $contact->firstname,
+                'lastname' => $contact->lastname,
+                'email' => $contact->email,
+            ]);
+    }
 }
