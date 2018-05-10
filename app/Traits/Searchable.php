@@ -14,12 +14,18 @@ trait Searchable
      * @param  array  $fields
      * @return $this
      */
-    public function scopeSearch(Builder $query, $value, array $fields = [])
+    public function scopeSearch(Builder $query, string $value, array $fields = [])
     {
         $value = $this->prepareSearchValue($value);
-        $fields = $this->prepareSearchFields($fields);
+        $fields = $this->searchable ?: $fields;
+        $fieldsString = $this->prepareSearchFields($fields);
 
-        return $query->whereRaw('match('.$fields.') against (? in boolean mode)', [$value]);
+        return $query->where(function ($query) use ($fieldsString, $fields, $value) {
+            $query->whereRaw('match('.$fieldsString.') against (? in boolean mode)', [$value]);
+            foreach ($fields as $field) {
+                $query->orWhere($field, 'LIKE', '%'.$value.'%');
+            }
+        });
     }
 
     /**
@@ -30,12 +36,18 @@ trait Searchable
      * @param  array  $fields
      * @return $this
      */
-    public function scopeOrSearch(Builder $query, $value, array $fields = [])
+    public function scopeOrSearch(Builder $query, string $value, array $fields = [])
     {
         $value = $this->prepareSearchValue($value);
-        $fields = $this->prepareSearchFields($fields);
+        $fields = $this->searchable ?: $fields;
+        $fieldsString = $this->prepareSearchFields($fields);
 
-        return $query->orWhereRaw('match('.$fields.') against (? in boolean mode)', [$value]);
+        return $query->orWhere(function ($query) use ($fieldsString, $fields, $value) {
+            $query->whereRaw('match('.$fieldsString.') against (? in boolean mode)', [$value]);
+            foreach ($fields as $field) {
+                $query->orWhere($field, 'LIKE', '%'.$value.'%');
+            }
+        });
     }
 
     /**
@@ -47,7 +59,7 @@ trait Searchable
      * @param  string|null  $locale
      * @return $this
      */
-    public function scopeSearchTranslation(Builder $query, $value, array $fields = [], $locale = null)
+    public function scopeSearchTranslation(Builder $query, string $value, array $fields = [], $locale = null)
     {
         return $query->whereHas('translations', function (Builder $q) use ($value, $fields, $locale) {
             if ($locale) {
@@ -67,7 +79,7 @@ trait Searchable
      * @param  string|null  $locale
      * @return $this
      */
-    public function scopeOrSearchTranslation(Builder $query, $value, array $fields = [], $locale = null)
+    public function scopeOrSearchTranslation(Builder $query, string $value, array $fields = [], $locale = null)
     {
         return $query->orWhereHas('translations', function (Builder $q) use ($value, $fields, $locale) {
             if ($locale) {
@@ -84,7 +96,7 @@ trait Searchable
      * @param  string  $value
      * @return string
      */
-    protected function prepareSearchValue($value) : string
+    protected function prepareSearchValue(string $value) : string
     {
         $valueArray = explode(' ', str_slug($value, ' '));
 
