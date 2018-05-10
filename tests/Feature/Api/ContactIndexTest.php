@@ -67,13 +67,13 @@ class ContactTest extends TestCase
     }
 
     /**
-     * Test contact index page
+     * Test contact search page by "name" parameter
      *
      * @return void
      */
-    public function testContactSearchName()
+    public function testContactSearchByName()
     {
-        factory(Contact::class, 50)->create();
+        factory(Contact::class, 20)->create();
 
         $contact = Contact::inRandomOrder()->first();
 
@@ -89,13 +89,13 @@ class ContactTest extends TestCase
     }
 
     /**
-     * Test contact index page
+     * Test contact search page by "email" parameter
      *
      * @return void
      */
-    public function testContactSearchEmail()
+    public function testContactSearchByEmail()
     {
-        factory(Contact::class, 50)->create();
+        factory(Contact::class, 20)->create();
 
         $contact = Contact::inRandomOrder()->first();
 
