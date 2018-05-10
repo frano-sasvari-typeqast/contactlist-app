@@ -88,7 +88,19 @@ class ContactController extends Controller
 
         $contact = $contactRepository->newQuery()
             ->filterById($id)
-            ->update($input);
+            ->first();
+
+        if (! $contact) {
+            abort(response()->json([
+                'meta' => [
+                    'error' => true,
+                    'code' => 404,
+                    'message' => 'Contact with ID "'.$id.'" was not found.'
+                ],
+            ], 404));
+        }
+
+        $contactRepository->update($contact, $input);
 
         return new ContactResource($contact);
     }
@@ -116,7 +128,7 @@ class ContactController extends Controller
             ], 404));
         }
 
-        $contact->delete();
+        $contactRepository->delete($contact);
 
         return new ContactResource($contact);
     }
