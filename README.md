@@ -76,3 +76,9 @@ Run following migration code:
 Run following seeder code:
 
     php artisan db:seed
+
+### 12. Run tests
+
+For running PHP Feature and PHP Unit tests run the following command:
+
+    ./vendor/bin/phpunit
