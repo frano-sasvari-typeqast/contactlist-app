@@ -26,7 +26,7 @@ class ContactTest extends TestCase
         $response = $this->get('contacts');
 
         $response
-            ->assertSuccessful()
+            ->assertStatus(200)
             ->assertJsonFragment([
                 'from' => 1,
                 'to' => 20,
@@ -54,7 +54,7 @@ class ContactTest extends TestCase
         $response = $this->get('contacts?page=3');
 
         $response
-            ->assertSuccessful()
+            ->assertStatus(200)
             ->assertJsonFragment([
                 'from' => 41,
                 'to' => 50,
