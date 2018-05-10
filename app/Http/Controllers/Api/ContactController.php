@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Repository\ContactRepository;
 use App\Http\Requests\ContactRequest;
 use App\Http\Resources\ContactResource;
+use App\Http\Uploads\ContactUploadAvatar;
 
 class ContactController extends Controller
 {
@@ -62,11 +63,16 @@ class ContactController extends Controller
      *
      * @param  \App\Http\Requests\ContactRequest  $request
      * @param  \App\Repository\ContactRepository  $contactRepository
+     * @param  \App\Http\Uploads\ContactUploadAvatar  $uploadAvatar
      * @return \Illuminate\Http\Response
      */
-    public function create(ContactRequest $request, ContactRepository $contactRepository)
+    public function create(ContactRequest $request, ContactRepository $contactRepository, ContactUploadAvatar $uploadAvatar)
     {
         $input = $request->validationData();
+
+        if ($input['upload_avatar']) {
+            $input['upload_avatar'] = $uploadAvatar->upload($input['upload_avatar']);
+        }
 
         $contact = $contactRepository->newQuery()
             ->create($input);
@@ -79,10 +85,11 @@ class ContactController extends Controller
      *
      * @param  \App\Http\Requests\ContactRequest  $request
      * @param  \App\Repository\ContactRepository  $contactRepository
+     * @param  \App\Http\Uploads\ContactUploadAvatar  $uploadAvatar
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ContactRequest $request, ContactRepository $contactRepository, $id)
+    public function update(ContactRequest $request, ContactRepository $contactRepository, ContactUploadAvatar $uploadAvatar, $id)
     {
         $input = $request->validationData();
 
@@ -98,6 +105,16 @@ class ContactController extends Controller
                     'message' => 'Contact with ID "'.$id.'" was not found.'
                 ],
             ], 404));
+        }
+
+        if ($input['upload_avatar']) {
+            $input['upload_avatar'] = $uploadAvatar->upload($input['upload_avatar']);
+
+            if ($contact->upload_avatar) {
+                $contact->upload_avatar->delete();
+            }
+        } else {
+            $input['upload_avatar'] = $contact->upload_avatar;
         }
 
         $contactRepository->update($contact, $input);
